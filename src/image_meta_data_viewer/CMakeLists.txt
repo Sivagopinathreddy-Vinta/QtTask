@@ -39,8 +39,3 @@ set_target_properties(${PROJECT_NAME}
         FOLDER "image_meta_data_viewer" # folder name
     )
 
-#include(GNUInstallDirs)
-#install(TARGETS ${PROJECT_NAME}
-#    BUNDLE DESTINATION .
-#    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-

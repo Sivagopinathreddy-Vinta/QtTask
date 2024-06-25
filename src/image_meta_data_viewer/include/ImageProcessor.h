@@ -1,5 +1,4 @@
-#ifndef IMAGEPROCESSOR_H
-#define IMAGEPROCESSOR_H
+#pragma once
 
 #include <QObject>
 
@@ -25,8 +24,7 @@ public slots:
 
 
 private:
-    QString m_message;
-    QString m_directoryPath;
+    QString mMessage;
+    QString mDirectoryPath;
 };
 
-#endif // IMAGEPROCESSOR_H

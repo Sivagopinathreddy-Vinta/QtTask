@@ -1,4 +1,5 @@
 #include "ImageProcessor.h"
+#include <iostream>
 
 #include <QImage>
 #include <QFile>
@@ -13,32 +14,29 @@ ImageProcessor::ImageProcessor(QObject *parent)
 }
 
 void ImageProcessor::loadImages(const QString &directoryPath) {
-    m_directoryPath = directoryPath;
+    mDirectoryPath = directoryPath;
     QtConcurrent::run([=]() {
-        QDir dir(m_directoryPath);
+        QDir dir(mDirectoryPath);
         QStringList imageFiles = dir.entryList(QStringList() << "*.jpg", QDir::Files);
         QStringList imagePaths;
         for (const QString &file : imageFiles) {
             QString fullPath = dir.absoluteFilePath(file);
             imagePaths << fullPath;
-            qDebug() << "Found image:" << fullPath; // Debugging
         }
         if (!imagePaths.isEmpty()) {
-            qDebug() << "Emitting imagesLoaded with" << imagePaths.size() << "images";
             emit imagesLoaded(imagePaths);
         } else {
-            qDebug() << "No images found in directory:" << m_directoryPath;
-            //std::cout<< "No images found in directory:" << m_directoryPath
+            std::cout << "No images found in directory: " << mDirectoryPath.toStdString() << std::endl;
         }
     });
 }
 
 QString ImageProcessor::message() const {
-    return m_message;
+    return mMessage;
 }
 
 QString ImageProcessor::loadMetadata(const QString &imageName) {
-    QString jsonFilePath = m_directoryPath + "/" + imageName;
+    QString jsonFilePath = mDirectoryPath + "/" + imageName;
     jsonFilePath.replace(".jpg", ".json");
 
     QFile file(jsonFilePath);
@@ -68,8 +66,8 @@ QString ImageProcessor::loadMetadata(const QString &imageName) {
 }
 
 void ImageProcessor::updateMessage(const QString &newMessage) {
-    if (m_message != newMessage) {
-        m_message = newMessage;
+    if (mMessage != newMessage) {
+        mMessage = newMessage;
         emit messageChanged();
     }
 }

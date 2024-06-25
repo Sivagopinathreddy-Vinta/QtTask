@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import com.example 1.0
 
 ApplicationWindow {
@@ -12,35 +13,56 @@ ApplicationWindow {
         id: imageProcessor
     }
 
-    Component.onCompleted: {
-        console.log("QML loaded successfully.");
-        imageProcessor.loadImages("C:/WorkSpace/DataBase");
-    }
-
     ListModel {
         id: imageListModel
+    }
+
+    Component.onCompleted: {
+        console.log("QML loaded successfully.");
+    }
+
+    RowLayout {
+        id: rowLayout
+        anchors.centerIn: parent
+
+        TextField {
+            id: directoryInput
+            text: "C:/WorkSpace/DataBase"
+            placeholderText: "Enter directory path"
+            Layout.fillWidth: true
+        }
+        Button {
+            text: "Load Images"
+            onClicked: {
+                var directory = directoryInput.text;
+                rowLayout.visible = false;
+                imageProcessor.loadImages(directory);
+
+            }
+        }
     }
 
     Row { // Splitting the view into two sections
         anchors.fill: parent
 
         ListView {
-            width: parent.width * 0.5 // Takes half the width
+            width: parent.width * 0.5
             height: parent.height
             model: imageListModel
             spacing: 10
-            delegate: Image {
-                source: modelData
-                width: 100
-                height: 100
-                MouseArea {
-                    anchors.fill: parent
-                   // onClicked: {
-                   //     messageText.text = "Hi " + modelData.substring(modelData.lastIndexOf("/") + 1);
-                   // }
-                    onClicked: {
-                        var imageName = modelData.substring(modelData.lastIndexOf("/") + 1);
-                        imageProcessor.onImageClicked(imageName); // Call the onImageClicked slot
+
+            Repeater {
+                model: imageListModel
+                Image {
+                    source: modelData
+                    width: 100
+                    height: 100
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            var imageName = modelData.substring(modelData.lastIndexOf("/") + 1);
+                            imageProcessor.onImageClicked(imageName);
+                        }
                     }
                 }
             }
@@ -48,7 +70,7 @@ ApplicationWindow {
 
         Text {
             id: messageText
-            text: imageProcessor.message // Bind to the message property
+            text: imageProcessor.message
             anchors.verticalCenter: parent.verticalCenter
             font.pointSize: 20
         }
