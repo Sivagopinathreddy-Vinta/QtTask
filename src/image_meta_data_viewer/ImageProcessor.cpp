@@ -1,3 +1,16 @@
+/**
+ * @class ImageProcessor
+ * @brief Implementation of the ImageProcessor class for handling image processing tasks.
+ *
+ * This file contains the implementation of the ImageProcessor class, which includes loading images from a directory,
+ * loading metadata for individual images, and managing messages related to image processing. It utilizes Qt's
+ * asynchronous capabilities to perform non-blocking image loading and processing.
+ *
+ * @author Sivagopinathredd Vinta
+ * @date  Creation date 2024-06-27
+ */
+
+
 #include "ImageProcessor.h"
 #include <iostream>
 

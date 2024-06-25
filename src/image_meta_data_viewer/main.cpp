@@ -6,7 +6,7 @@
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<ImageProcessor>("com.example", 1, 0, "ImageProcessor");
+    qmlRegisterType<ImageProcessor>("com.ImageProcessor", 1, 0, "ImageProcessor");
 
     QQmlApplicationEngine engine;
     ImageProcessor *processor = new ImageProcessor();

@@ -1,7 +1,11 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
-import com.example 1.0
+
+// @brief Main QML interface for the application
+// Filename: main.qml
+
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import com.ImageProcessor 1.0
 
 ApplicationWindow {
     id:window
