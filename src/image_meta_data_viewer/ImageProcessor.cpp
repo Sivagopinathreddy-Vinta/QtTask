@@ -1,11 +1,11 @@
-#include "imageprocessor.h"
+#include "ImageProcessor.h"
 
 #include <QImage>
-#include <QtConcurrent>
-
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+
+#include <QtConcurrent>
 
 ImageProcessor::ImageProcessor(QObject *parent)
     : QObject(parent)
