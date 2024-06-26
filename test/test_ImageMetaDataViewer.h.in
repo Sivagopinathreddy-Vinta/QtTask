@@ -1,0 +1,5 @@
+#ifndef TEST_RESOURCE_PATH_H
+
+#define TEST_RESOURCE_PATH_H "@CMAKE_CURRENT_LIST_DIR@/../app_setup/data_base/"
+
+#endif // TEST_RESOURCE_PATH_H

@@ -1,8 +1,8 @@
 /**
- * @class ImageProcessor
- * @brief Implementation of the ImageProcessor class for handling image processing tasks.
+ * @class ImageMetaDataViewer
+ * @brief Implementation of the ImageMetaDataViewer class for handling image processing tasks.
  *
- * This file contains the implementation of the ImageProcessor class, which includes loading images from a directory,
+ * This file contains the implementation of the ImageMetaDataViewer class, which includes loading images from a directory,
  * loading metadata for individual images, and managing messages related to image processing. It utilizes Qt's
  * asynchronous capabilities to perform non-blocking image loading and processing.
  *
@@ -11,7 +11,7 @@
  */
 
 
-#include "ImageProcessor.h"
+#include "ImageMetaDataViewer.h"
 #include <iostream>
 
 #include <QImage>
@@ -23,12 +23,12 @@
 #include <thread>
 #include <chrono>
 
-ImageProcessor::ImageProcessor(QObject *parent)
+ImageMetaDataViewer::ImageMetaDataViewer(QObject *parent)
     : QObject(parent)
 {
 }
 
-void ImageProcessor::loadImages(const QString &directoryPath) {
+void ImageMetaDataViewer::loadImages(const QString &directoryPath) {
     if (mLoading)
         return;
     mDirectoryPath = directoryPath;
@@ -65,18 +65,18 @@ void ImageProcessor::loadImages(const QString &directoryPath) {
     }).detach();
 }
 
-void ImageProcessor::setLoading(bool loading) {
+void ImageMetaDataViewer::setLoading(bool loading) {
     if (mLoading != loading) {
         mLoading = loading;
         emit loadingChanged();
     }
 }
 
-QString ImageProcessor::message() const {
+QString ImageMetaDataViewer::message() const {
     return mMessage;
 }
 
-QString ImageProcessor::loadMetadata(const QString &imageName) {
+QString ImageMetaDataViewer::loadMetadata(const QString &imageName) {
     QString jsonFilePath = mDirectoryPath + "/" + imageName;
     jsonFilePath.replace(".jpg", ".json");
 
@@ -106,14 +106,14 @@ QString ImageProcessor::loadMetadata(const QString &imageName) {
         .arg(elevation);
 }
 
-void ImageProcessor::updateMessage(const QString &newMessage) {
+void ImageMetaDataViewer::updateMessage(const QString &newMessage) {
     if (mMessage != newMessage) {
         mMessage = newMessage;
         emit messageChanged();
     }
 }
 
-void ImageProcessor::onImageClicked(const QString &imageName) {
+void ImageMetaDataViewer::onImageClicked(const QString &imageName) {
     QString metadataMessage = loadMetadata(imageName);
     updateMessage(metadataMessage);
 }

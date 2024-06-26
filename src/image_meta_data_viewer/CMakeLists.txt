@@ -6,11 +6,11 @@ set(CMAKE_AUTORCC ON)
 find_package(Qt5 REQUIRED COMPONENTS Core Quick)
 
 set(image_meta_data_viewer_includes
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/ImageProcessor.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/ImageMetaDataViewer.h
     )
 
 set(image_processor_lib_sources
-    ImageProcessor.cpp
+    ImageMetaDataViewer.cpp
 )
 
 set(image_meta_data_viewer_sources
@@ -22,20 +22,20 @@ set(image_meta_data_viewer_resources
     )
 
 # Add library target for Gtest
-add_library(ImageProcessorLib
+add_library(${PROJECT_NAME}Lib
     ${image_processor_lib_sources}
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ImageProcessor.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/ImageMetaDataViewer.h
 )
 
-set_target_properties(ImageProcessorLib PROPERTIES
+set_target_properties(${PROJECT_NAME}Lib PROPERTIES
     AUTOMOC ON
 )
 
-target_include_directories(ImageProcessorLib PUBLIC
+target_include_directories(${PROJECT_NAME}Lib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(ImageProcessorLib PUBLIC
+target_link_libraries(${PROJECT_NAME}Lib PUBLIC
     Qt5::Core
     Qt5::Quick
 )
@@ -53,8 +53,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt5::Core
         Qt5::Quick
-        ImageProcessorLib
+        ${PROJECT_NAME}Lib
     )
+set_target_properties(${PROJECT_NAME}Lib
+    PROPERTIES
+        FOLDER "image_meta_data_viewer" # folder name
+    )
+
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES

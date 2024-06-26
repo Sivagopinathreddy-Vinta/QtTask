@@ -1,12 +1,18 @@
-project(test_ImageProcessor)
+project(test_ImageMetaDataViewer)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/test_ImageMetaDataViewer.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated/test_ImageMetaDataViewer.h )
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/generated)
 
 add_executable(${PROJECT_NAME}
-     test_ImageProcessor.cpp
+     test_ImageMetaDataViewer.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
       GTest::gtest
       GTest::gmock_main
+      Qt5::Core
+      Qt5::Quick
+      ImageMetaDataViewerLib
 )
 
 

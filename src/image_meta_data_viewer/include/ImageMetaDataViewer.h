@@ -1,8 +1,8 @@
 /**
- * @class ImageProcessor
- * @brief Implementation of the ImageProcessor class for handling image processing tasks.
+ * @class ImageMetaDataViewer
+ * @brief Implementation of the ImageMetaDataViewer class for handling image processing tasks.
  *
- * This file contains the implementation of the ImageProcessor class, which includes loading images from a directory,
+ * This file contains the implementation of the ImageMetaDataViewer class, which includes loading images from a directory,
  * loading metadata for individual images, and managing messages related to image processing. It utilizes Qt's
  * asynchronous capabilities to perform non-blocking image loading and processing.
  *
@@ -14,7 +14,7 @@
 
 #include <QObject>
 
-class ImageProcessor : public QObject
+class ImageMetaDataViewer : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString message READ message NOTIFY messageChanged)
@@ -22,10 +22,10 @@ class ImageProcessor : public QObject
 
 public:
     /**
-     * @brief Constructor for ImageProcessor.
+     * @brief Constructor for ImageMetaDataViewer.
      * @param parent The parent QObject, default is nullptr.
      */
-    explicit ImageProcessor(QObject *parent = nullptr);
+    explicit ImageMetaDataViewer(QObject *parent = nullptr);
 
     /**
      * @brief Loads images from the specified directory path.
