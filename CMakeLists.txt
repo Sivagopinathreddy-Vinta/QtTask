@@ -4,7 +4,7 @@ project(Helsondt VERSION 0.1 LANGUAGES CXX)
 
 # ---------------------------------- Options --------------------------------- #
 # Testing
-option(UT_ENABLED "Enable building all tests" ON)
+option(UT_ENABLED "Enable building all tests" OFF)
 
 # --------------------------------- Settings --------------------------------- #
 # Set C++ standard on global level
