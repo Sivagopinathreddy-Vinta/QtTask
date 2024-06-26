@@ -1,12 +1,12 @@
 # ImageMetaDataViewer Application
 
 This application is a simple image processing tool built using Qt.
-It allows users to interact with images in getting meta data for the image, facilitated by the `ImageProcessor` class.
+It allows users to interact with images in getting meta data for the image, facilitated by the `ImageMetaDataViewer` class.
 
 ## Overview
 
 The application is structured around Qt's QML and C++ integration, 
-allowing for a responsive and intuitive UI. The `ImageProcessor` class is exposed to QML,
+allowing for a responsive and intuitive UI. The `ImageMetaDataViewer` class is exposed to QML,
 enabling direct interaction with images through the UI.
 
 
@@ -51,3 +51,7 @@ After building, run the generated executable. On the first run, the application 
 
 - **Qt Not Found**: Ensure that Qt is correctly installed and that the `CMAKE_PREFIX_PATH` environment variable is set to the Qt installation path.
 - **Build Errors**: Verify that all prerequisites are installed and that the CMake configuration matches your development environment.
+
+# Building Tests
+
+## Enable UNITESTS ON in CMAKE Gui and make shure gtest config.cmake file is set and give that path in the main CMakeLists.txt file and build it
