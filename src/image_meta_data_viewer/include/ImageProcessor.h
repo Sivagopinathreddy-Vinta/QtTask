@@ -6,7 +6,7 @@
  * loading metadata for individual images, and managing messages related to image processing. It utilizes Qt's
  * asynchronous capabilities to perform non-blocking image loading and processing.
  *
- * @author Sivagopinathredd Vinta
+ * @author Sivagopinathreddy Vinta
  * @date  Creation date 2024-06-27
  */
 

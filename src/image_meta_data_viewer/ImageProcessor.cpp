@@ -18,8 +18,10 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QDir>
 
-#include <QtConcurrent>
+#include <thread>
+#include <chrono>
 
 ImageProcessor::ImageProcessor(QObject *parent)
     : QObject(parent)
@@ -27,10 +29,18 @@ ImageProcessor::ImageProcessor(QObject *parent)
 }
 
 void ImageProcessor::loadImages(const QString &directoryPath) {
+    if (mLoading)
+        return;
     mDirectoryPath = directoryPath;
     setLoading(true);
 
-    QtConcurrent::run([=]() {
+    auto start = std::chrono::high_resolution_clock::now();
+
+    std::thread([this, start, directoryPath]() {
+
+        // Simulate long-running operation
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+
         QDir dir(mDirectoryPath);
         QStringList imageFiles = dir.entryList(QStringList() << "*.jpg", QDir::Files);
         QStringList imagePaths;
@@ -44,12 +54,15 @@ void ImageProcessor::loadImages(const QString &directoryPath) {
             std::cout << "No images found in directory: " << mDirectoryPath.toStdString() << std::endl;
         }
 
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = end - start;
+
         // with this block ensuring loading on this main thread
         // which ensures ui thread not blocking
         QMetaObject::invokeMethod(this, [=]() {
             setLoading(false);
         }, Qt::QueuedConnection);
-    });
+    }).detach();
 }
 
 void ImageProcessor::setLoading(bool loading) {

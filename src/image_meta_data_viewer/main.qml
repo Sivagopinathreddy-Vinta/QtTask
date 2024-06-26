@@ -18,14 +18,16 @@ ApplicationWindow {
         id: imageProcessor
     }
 
-    ListModel {
-        id: imageListModel
-    }
+
 
     BusyIndicator {
         anchors.centerIn: parent
         running: imageProcessor.loading
         visible: imageProcessor.loading
+    }
+    
+    ListModel {
+        id: imageListModel
     }
 
     Component.onCompleted: {
@@ -38,9 +40,11 @@ ApplicationWindow {
 
         TextField {
             id: directoryInput
-            text: "C:/WorkSpace/DataBase"
-            placeholderText: "Enter directory path"
+            text: ""
+            placeholderText: "Enter directory path Eg. C:/WorkSpace/DataBase"
             Layout.fillWidth: true
+            enabled: true
+            focus: true
         }
         Button {
             text: "Load Images"
