@@ -28,6 +28,8 @@ ImageProcessor::ImageProcessor(QObject *parent)
 
 void ImageProcessor::loadImages(const QString &directoryPath) {
     mDirectoryPath = directoryPath;
+    setLoading(true);
+
     QtConcurrent::run([=]() {
         QDir dir(mDirectoryPath);
         QStringList imageFiles = dir.entryList(QStringList() << "*.jpg", QDir::Files);
@@ -41,7 +43,20 @@ void ImageProcessor::loadImages(const QString &directoryPath) {
         } else {
             std::cout << "No images found in directory: " << mDirectoryPath.toStdString() << std::endl;
         }
+
+        // with this block ensuring loading on this main thread
+        // which ensures ui thread not blocking
+        QMetaObject::invokeMethod(this, [=]() {
+            setLoading(false);
+        }, Qt::QueuedConnection);
     });
+}
+
+void ImageProcessor::setLoading(bool loading) {
+    if (mLoading != loading) {
+        mLoading = loading;
+        emit loadingChanged();
+    }
 }
 
 QString ImageProcessor::message() const {

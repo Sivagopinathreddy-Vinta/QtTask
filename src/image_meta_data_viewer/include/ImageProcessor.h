@@ -18,6 +18,7 @@ class ImageProcessor : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString message READ message NOTIFY messageChanged)
+    Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
 
 public:
     /**
@@ -51,10 +52,14 @@ public:
      */
     void updateMessage(const QString &newMessage);
 
+    void setLoading(bool loading);
+    bool isLoading() const { return mLoading; }
+
 signals:
     void imagesLoaded(const QStringList &imagePaths);
     void imageClicked(const QString &imageName);
     void messageChanged();
+    void loadingChanged();
 
 public slots:
     void onImageClicked(const QString &imageName);
@@ -63,5 +68,6 @@ public slots:
 private:
     QString mMessage;
     QString mDirectoryPath;
+    bool mLoading = false;
 };
 

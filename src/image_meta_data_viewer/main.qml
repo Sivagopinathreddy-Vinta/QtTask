@@ -22,6 +22,12 @@ ApplicationWindow {
         id: imageListModel
     }
 
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: imageProcessor.loading
+        visible: imageProcessor.loading
+    }
+
     Component.onCompleted: {
         console.log("QML loaded successfully.");
     }
