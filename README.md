@@ -54,4 +54,4 @@ After building, run the generated executable. On the first run, the application 
 
 # Building Tests
 
-## Enable UNITESTS ON in CMAKE Gui and make shure gtest config.cmake file is set and give that path in the main CMakeLists.txt file and build it
+- Enable UNITESTS ON in CMAKE Gui and make shure gtest config.cmake file is set and give that path in the main CMakeLists.txt file and build it
