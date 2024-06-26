@@ -14,7 +14,9 @@ enabling direct interaction with images through the UI.
 
 **Important:** <span style="color:red">add `QT_DIR\bin` folder to environment path.</span>
 
-Provide in `\app_setup\ImageMetaDataViewer.exe` to run application 
+You can view application in action directly `\files\application_testing.mp4`
+
+Provide in `\files\ImageMetaDataViewer.exe` to run application 
 for database `\app_setup\data_base` follow this structure place image file and json file with meta information and with same name 
 dont use nested directories.
 

@@ -7,10 +7,11 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import com.ImageProcessor 1.0
 
+
 ApplicationWindow {
     id:window
     visible: true
-    width: 640 // Increased width to accommodate split view
+    width: 640
     height: 480
 
     ImageProcessor {
@@ -46,27 +47,24 @@ ApplicationWindow {
         }
     }
 
-    Row { // Splitting the view into two sections
+    Row {
         anchors.fill: parent
+
 
         ListView {
             width: parent.width * 0.5
             height: parent.height
             model: imageListModel
             spacing: 10
-
-            Repeater {
-                model: imageListModel
-                Image {
-                    source: modelData
-                    width: 100
-                    height: 100
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            var imageName = modelData.substring(modelData.lastIndexOf("/") + 1);
-                            imageProcessor.onImageClicked(imageName);
-                        }
+            delegate: Image {
+                source: modelData
+                width: 100
+                height: 100
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        var imageName = modelData.substring(modelData.lastIndexOf("/") + 1);
+                        imageProcessor.onImageClicked(imageName); // Call the onImageClicked slot
                     }
                 }
             }
@@ -97,3 +95,4 @@ ApplicationWindow {
         onClicked: window.close()
     }
 }
+
