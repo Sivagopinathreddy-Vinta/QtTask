@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Helsondt VERSION 0.1 LANGUAGES CXX)
+project(QtTask VERSION 0.1 LANGUAGES CXX)
 
 # ---------------------------------- Options --------------------------------- #
 # Testing
